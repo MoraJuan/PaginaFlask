@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
 from werkzeug.security import generate_password_hash, check_password_hash
 import hashlib
 from usuario import ClaseUsuario
@@ -25,7 +26,7 @@ def bienvenida():
 @app.route('/incio_sesion', methods = ['GET','POST'])
 def iniciar_sesion():
     if request.method == 'POST':
-        if not request.form['nombre'] or not request.form['email'] or not request.form['password']:
+        if not request.form['email'] or not request.form['password']:
             return render_template('error.html')
         else:
             usuario_actual = Usuario.query.filter_by(correo = request.form['email']).first()
@@ -46,8 +47,13 @@ def recetas():
     if request.method == 'POST':
         if request.form['nombre'] and request.form['tiempo'] and request.form['elaboracion']:
             nueva_receta = Receta(nombre=request.form['nombre'],tiempo=request.form['tiempo'] ,elaboracion=request.form['elaboracion'],cantidadmegusta = 0,fecha = datetime.now(), usuarioid = __sesionactual.getUsuario().id)
+            print(type(nueva_receta))
             db.session.add(nueva_receta)
             db.session.commit()
+            receta_actual = Receta.query.filter_by(nombre = request.form['nombre']).first()
+            print(receta_actual)
+
+            __sesionactual.addreceta(receta_actual.usuarioid)
             return render_template('receta.html')
         else:
             return render_template('error.html')
@@ -58,8 +64,8 @@ def recetas():
 def ingredientes():
     if request.method == 'POST':
         if request.form['nombre'] and request.form['Cantidad'] and request.form['Unidad']:
-            id_receta = int(__sesionactual.getReceta().id)
-            nuevo_ingrediente = Ingrediente(nombre=request.form['nombre'],cantidad=request.form['Cantidad'] ,unidad=request.form['Unidad'], recetaid = __sesionactual.get)
+            
+            nuevo_ingrediente = Ingrediente(nombre=request.form['nombre'],cantidad=request.form['Cantidad'] ,unidad=request.form['Unidad'], recetaid = __sesionactual.getReceta())
             db.session.add(nuevo_ingrediente)
             db.session.commit()
             return render_template('ingredientes.html')
@@ -68,9 +74,20 @@ def ingredientes():
     else:
         return render_template('ingredientes.html')
 
-@app.route('/ranking', methods = ['POST', ['GET']])
+@app.route('/ranking', methods = ['POST', 'GET'])
 def lista_ranking():
-    return render_template('/', receta = Receta.query.order_by(desc(Receta.cantidadmegusta)).all())
+    return render_template('rankings.html', receta = Receta.query.order_by(desc(Receta.cantidadmegusta)).all())
+
+
+@app.route('/listar_tiempo', methods = ['POST', 'GET'])
+def listar_tiempo():
+    if request.method ==  'POST':
+        if request.form['tiempo']:
+            return render_template('listar_tiempo.html', tiempo= request.form['tiempo'], receta = Receta.query.filter(Receta.tiempo < int(request.form['tiempo'] )).all())
+    else:
+        return render_template('listar_tiempo.html')
+@app
+
 
 @app.route('/nuevo_usuario', methods = ['GET','POST'])
 def nuevo_usuario():
@@ -81,7 +98,7 @@ def nuevo_usuario():
             registro = Usuario(nombre = request.form['nombre'], correo = request.form['email'], clave = generate_password_hash(request.form['password']))
             db.session.add(registro)
             db.session.commit()
-            return render_template('iniciar.html')
+            return render_template('Iniciar.html')
     return  render_template('nuevo_usuario.html')
 
 if __name__ == '__main__':

@@ -7,7 +7,10 @@
     <form action = "http://localhost:5000/bienvenida" method = "post">
         <div class="menu">
           <a href = "{{ url_for('recetas') }}"> Compartir receta </a></li><br>
-          <a href = ""> Consultar ranking </a></li><br>
+          <br>
+          <a href = "{{ url_for('lista_ranking') }}"> Consultar ranking </a></li><br>
+          <br>
+          <a href = "{{ url_for('listar_tiempo')}}"> Consultar tiempo</a>
         </div> 
     </form>
   </body>

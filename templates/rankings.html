@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado recetas</title>
+</head>
+<body>
+    {% for Xreceta in receta %}
+        <a>---------------------------------------------</a>
+        <a>Receta:{{Xreceta.usuario.nombre}}</a>
+        <br>
+        
+        <br>
+        <a>Nombre: {{Xreceta.nombre}}</a>
+        <br>
+        <br>
+        <a>Cantidad de me gusta: {{Xreceta.cantidadmegusta}}</a>
+        <br>
+        <br>
+    {%endfor%}
+
+</body>
+</html>

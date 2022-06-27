@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar por tiempo</title>
+</head>
+<body>
+    <form method="post" action="{{ url_for('listar_tiempo') }}"> 
+        <label for="tiempo">Ingrese tiempo:</label>
+        <input type="text" name = "tiempo" placeholder="Tiempo">
+        <input type="submit" value = "Buscar">
+    </form>
+    {% for Xreceta in receta %}
+        {% if Xreceta.tiempo is not none %}
+            <br>
+            <a>Recetas: {{Xreceta.nombre}}</a>
+            
+        {% endif %}
+    {%endfor%}
+</body>
+</html>

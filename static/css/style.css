@@ -52,3 +52,10 @@
     text-decoration-color:none;
     color: white; 
 }
+.warning{
+    background-image: url("../img/Stop-hand.svg.png");
+    background-size: 116rem;
+    background-repeat: no-repeat;
+    background-position-x:center;
+    background-position-y:center;
+}
