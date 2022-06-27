@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body class="body-form">
+        <form action="{{ request.path }}" method="post">
+            <center>
+                <a> ingrediente </a>
+                <label for = "ingredientes"> Nombre de Ingrediente</label>
+                <input type = "text" name = "nombre" placeholder="Nombre" required = ""/>
+                <br> 
+                <br>
+                       
+                <label for ="Cantidad"> Cantidad</label><br>
+                <input type = "text" name = "Cantidad" required ="" /> <br>
+                <br>
+                <br>
+    
+                <label for = "Unidad"> Unidad de medidad</label>    <br>
+                <input type ="text" name = "Unidad" required ="" /> <br>
+                <br>
+                <input type = "submit" value = "Guardar Ingredientes"/>
+                <a href="{{ url_for('recetas') }}"> Volver a Receta </a>
+            </center>
+        </from>
+
+    </body>
+</html>

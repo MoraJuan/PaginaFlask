@@ -8,50 +8,20 @@
     <body>
         <form action="{{ request.path }}" method="post">
             <center>
-            <a>RECETA NUEVA</a><br>
-            <br>
-            {% if cantIngredientes == 0: %}
-                <label for = "cantIngredientes">Ingrese la cantidad de ingredientes a usar (maximo 10)</label><br>
-                <input type = "text" name = "cantIngredientes" placeholder = "cantidad de ingredientes" />
                 <br>
-                
-            {% endif %}
-            {% if cantIngredientes != 0: %}
-                <br>
-                <label for = "nombre"> Nombre de la receta </label><br>
+                <label for = "nombre">Nombre de la receta</label><br>
                 <input type = "text" name = "nombre" placeholder = "Nombre" /><br>
                 <br>
-                <label for = "tiempo">Tiempo de coccin</labl><br>
+
+                <label for = "tiempo">Tiempo de coccion</labl><br>
                 <input type = "text" name = "tiempo" placeholder = "Tiempo" /><br>
                 <br>
-                <label for = "elaboracion">Escriba su receta</label><br>
+
+                <label for = "elaboracion">Proceso de elaboracion</label><br>
                 <textarea name = "elaboracion" placeholder = "Elaboracion" cols="60" rows ="8"></textarea><br>
-                <h3>Ingredientes</h3>
-            {% endif %}
-            <table>
-            {% for i in range(cantIngredientes) %}
                 
-                <br>          
-                <tr> <td><label for = "ingredientes"> Nombre de Ingredeintes</label></td>
-                <td><input type = "text" name = "ingredientes{{i}}" placeholder="Nombre" required = ""/> </td>
-                <br> 
-                <br>
-                   
-                <label for ="Cantidad"> Cantidad</label><br>
-                <input type = "text" name = "Cantidad{{i}}" required ="" /> <br>
-                <br>
-                <br>
-                <label for = "Unidad"> Unidad de medidad</label>    <br>
-                <input type ="text" name = "Unidad{{i}}" required ="" /> <br>
-                </tr>
-            {% endfor %}
-            </table>
-
+                <a href="{{ url_for('ingredientes') }}"> AGREGAR INGREDIENTE </a>
                 <input type = "submit" value = "Enviar"/>
-            
-
-         
-            
             </center>
         </from>
     </body>

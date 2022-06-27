@@ -38,21 +38,39 @@ def iniciar_sesion():
                     return render_template('bienvenida.html')
                 else:
                     return render_template('error.html')
+    else:
+        return render_template('receta.html')
 
 @app.route('/recetas', methods = ['GET', 'POST'])
 def recetas():
     if request.method == 'POST':
-        if request.form['cantIngredientes'] and int(request.form['cantIngredientes']) < 10:
-            return render_template('receta.html', cantIngredientes = int(request.form['cantIngredientes']))
-        if request.form['nombre'] and request.form['tiempo'] and request.form['descripcion']:
-            nueva_receta = Receta(nombre=request.form['nombre'],tiempo=request.form['tiempo'] ,descripcion=request.form['descripcion'],cantidadmegusta = 0,fecha = datetime.now(),userioid = __sesionactual.getUsuario().id)
-
+        if request.form['nombre'] and request.form['tiempo'] and request.form['elaboracion']:
+            nueva_receta = Receta(nombre=request.form['nombre'],tiempo=request.form['tiempo'] ,elaboracion=request.form['elaboracion'],cantidadmegusta = 0,fecha = datetime.now(), usuarioid = __sesionactual.getUsuario().id)
+            db.session.add(nueva_receta)
+            db.session.commit()
+            return render_template('receta.html')
         else:
             return render_template('error.html')
     else:
-        return render_template('receta.html', cantIngredientes = 0)
+        return render_template('receta.html')
 
-        
+@app.route('/ingredientes' , methods = ['GET', 'POST'])
+def ingredientes():
+    if request.method == 'POST':
+        if request.form['nombre'] and request.form['Cantidad'] and request.form['Unidad']:
+            id_receta = int(__sesionactual.getReceta().id)
+            nuevo_ingrediente = Ingrediente(nombre=request.form['nombre'],cantidad=request.form['Cantidad'] ,unidad=request.form['Unidad'], recetaid = __sesionactual.get)
+            db.session.add(nuevo_ingrediente)
+            db.session.commit()
+            return render_template('ingredientes.html')
+        else:
+            return render_template('error.html')
+    else:
+        return render_template('ingredientes.html')
+
+@app.route('/ranking', methods = ['POST', ['GET']])
+def lista_ranking():
+    return render_template('/', receta = Receta.query.order_by(desc(Receta.cantidadmegusta)).all())
 
 @app.route('/nuevo_usuario', methods = ['GET','POST'])
 def nuevo_usuario():

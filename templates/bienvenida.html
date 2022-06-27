@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="static\css\style.css">
   </head>
-  <body>
+  <body class="body-bienvenida">
     <form action = "http://localhost:5000/bienvenida" method = "post">
-      <center>
-      <a href = "{{ url_for('recetas') }}"> Compartir receta </a></li><br>
-      </center>
+        <div class="menu">
+          <a href = "{{ url_for('recetas') }}"> Compartir receta </a></li><br>
+          <a href = ""> Consultar ranking </a></li><br>
+        </div> 
     </form>
   </body>
 </html>

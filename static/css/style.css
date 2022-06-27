@@ -1,0 +1,54 @@
+.body-form {
+    background-image: url(../img/imagen2.jpg);
+    background-size: 116rem;
+    background-repeat: no-repeat;
+    background-position-x:center;
+    background-position-y:center;
+
+    color:azure
+}
+.registro{
+    background-color:transparent;
+    color: white;
+    margin-top: 8rem;
+    margin-right: 32rem;
+    margin-left: 32rem;
+   
+}
+.Sesion {
+    padding-bottom: 0px;
+    
+
+}
+.Sesion h1{
+    margin-top: 4px;
+}
+
+.formulario{
+    margin-top: 2rem ;
+    color: white;
+    background-color: transparent;
+   
+}   
+
+.body-bienvenida{
+    background-image: url("../img/imagen1.jpg");
+    background-size: 116rem;
+    background-repeat: no-repeat;
+    background-position-x:center;
+    background-position-y:center;
+
+    padding: 5rem;
+}
+
+.menu{
+    display: flex;
+    color: white;
+    font-size: x-large;
+    flex-direction: column;
+}
+
+.menu a{
+    text-decoration-color:none;
+    color: white; 
+}
