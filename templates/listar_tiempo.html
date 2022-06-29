@@ -17,8 +17,9 @@
     {% for Xreceta in receta %}
         {% if Xreceta.tiempo is not none %}
             <br>
-            <a>{{Xreceta.nombre}}</a> (<a href="{{ url_for('incrementar') }} "> Click para me gusta</a>)
-           
+            <form method="post" action="{{ url_for('incrementar') }}" >
+                <a>{{Xreceta.nombre}}</a> <input type="submit" name="megusta" value="Me gusta"> <input hidden="recetaid" type="text">
+            </form>
         {% endif %}
     {%endfor%}
     </center>

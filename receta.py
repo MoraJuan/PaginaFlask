@@ -1,4 +1,4 @@
-class ClaseUsuario:
+class ClaseReceta:
     __receta = None
 
     def __init__(self):

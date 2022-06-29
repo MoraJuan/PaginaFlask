@@ -46,12 +46,9 @@ def recetas():
     if request.method == 'POST':
         if request.form['nombre'] and request.form['tiempo'] and request.form['elaboracion']:
             nueva_receta = Receta(nombre=request.form['nombre'],tiempo=request.form['tiempo'] ,elaboracion=request.form['elaboracion'],cantidadmegusta = 0,fecha = datetime.now(), usuarioid = __sesionactual.getUsuario().id)
-            print(type(nueva_receta))
             db.session.add(nueva_receta)
             db.session.commit()
             receta_actual = Receta.query.filter_by(nombre = request.form['nombre']).first()
-            print(receta_actual)
-
             __sesionactual.addreceta(receta_actual.usuarioid)
             return render_template('receta.html')
         else:
@@ -82,8 +79,7 @@ def lista_ranking():
 def listar_tiempo():
     if request.method ==  'POST':
         if request.form['tiempo']:
-            
-            return render_template('listar_tiempo.html', tiempo= request.form['tiempo'], receta = Receta.query.filter(Receta.tiempo < int(request.form['tiempo'] )).all())
+            return render_template('listar_tiempo2.html', tiempo= request.form['tiempo'], receta = Receta.query.filter(Receta.tiempo < int(request.form['tiempo'] )).all())
     else:
         return render_template('listar_tiempo.html')
 
@@ -91,16 +87,16 @@ def listar_tiempo():
 @app.route('/incrementarMeGusta', methods = ['POST', 'GET'])
 def incrementar():
     if request.method == 'POST':
-        if request.form['recetaid']:
+        if request.form['megusta']:
                 receta_actual = Receta.query.get(request.form['recetaid'])
-                nueva_receta = Receta(id = receta_actual.id,nombre = receta_actual.nombre, tiempo = receta_actual.tiempo, fecha = receta_actual.fecha, elaboracion = receta_actual.elaboracion, cantidadmegusta = int(receta_actual.cantidadmegusta)+1,  usuarioid = receta_actual.usuarioid, ingrediente = receta_actual.ingrediente)
-                db.session.delete(receta_actual)
-                db.session.add(nueva_receta)
+                receta_actual.cantidadmegusta+=1
+                #nueva_receta = Receta(id = receta_actual.id,nombre = receta_actual.nombre, tiempo = receta_actual.tiempo, fecha = receta_actual.fecha, elaboracion = receta_actual.elaboracion, cantidadmegusta = int(receta_actual.cantidadmegusta)+1,  usuarioid = receta_actual.usuarioid, ingrediente = receta_actual.ingrediente)
+                #db.session.delete(receta_actual)
+                #db.session.add(nueva_receta)
                 db.session.commit()
-                user_actual = __sesionactual.getUsuario().id
-                nombre_usuario = user_actual.nombre
+               
                 return render_template('aviso.html')
-    return render_template('listar_tiempo.html')
+    return render_template('listar_tiempo2.html')
 
 @app.route('/listar_ingrediente', methods = ['GET', 'POST'])
 def listar_ingredientes():
