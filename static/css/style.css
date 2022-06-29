@@ -4,13 +4,13 @@
     background-repeat: no-repeat;
     background-position-x:center;
     background-position-y:center;
-
+    
     color:azure
 }
 .registro{
     background-color:transparent;
     color: white;
-    margin-top: 8rem;
+    margin-top: 1rem;
     margin-right: 32rem;
     margin-left: 32rem;
    
@@ -33,7 +33,7 @@
 
 .body-bienvenida{
     background-image: url("../img/imagen1.jpg");
-    background-size: 116rem;
+    background-size: 90rem;
     background-repeat: no-repeat;
     background-position-x:center;
     background-position-y:center;
@@ -58,4 +58,83 @@
     background-repeat: no-repeat;
     background-position-x:center;
     background-position-y:center;
+}
+
+.body-receta{
+    background-image: url("../img/imagenn3-min.jpg");
+    background-size: 90rem;
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 20%;
+}
+.receta{
+    margin-top: 2rem;
+}
+
+.Boton{
+    text-decoration: none;
+    text-decoration-color:none;
+    user-select: none;
+    cursor: default;
+    white-space: pre;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: buttonface;
+    color: black;
+    padding: 1px 6px;
+    border-width: 1px;
+    border-style: outset;
+    border-color: buttontext;
+    border-image: initial;
+    border-radius: 0.1rem;
+    height: 10px;
+}
+
+.NombreIngrediente{
+    margin:3.5rem;
+    text-decoration: none;
+    font-size: 2rem;
+}
+.body-ranking{
+    background-color: #f7edd2e5;
+
+} 
+
+.logo{
+    width: 200px;
+    height: 150px;
+    display: flex;
+    margin-left: 63rem;
+}
+
+.logoBienvenida{
+    width: 200px;
+    height: 150px;
+    display: flex;
+}
+
+.body-ingredientes{
+    background-image: url("../img/imagen4.jpg");
+    background-size: 95rem;
+    background-repeat: no-repeat;
+    background-position-x:center;
+    background-position-y:center;
+    color:white
+}
+.body-tiempo{
+    background-image: url("../img/imagen5.jpg");
+    background-size: 86rem;
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 10%;
+    color:white
+    
+    
+}
+
+.body-listar-ingredientes{
+    background-image: url("../img/");
+    background-repeat: no-repeat;
+    background-size: 90rem;
+    
 }

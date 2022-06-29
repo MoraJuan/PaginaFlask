@@ -2,20 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="static\css\style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Buscar por tiempo</title>
 </head>
-<body>
+<body class="body-tiempo">
+    <center>
     <form method="post" action="{{ url_for('listar_tiempo') }}"> 
         <label for="tiempo">Ingrese tiempo:</label>
         <input type="text" name = "tiempo" placeholder="Tiempo">
         <input type="submit" value = "Buscar">
     </form>
+   
     {% for Xreceta in receta %}
         {% if Xreceta.tiempo is not none %}
             <br>
-            <a>Recetas: {{Xreceta.nombre}}</a>
-            
+            <a>{{Xreceta.nombre}}</a> (<a href="{{ url_for('incrementar') }} "> Click para me gusta</a>)
+           
         {% endif %}
     {%endfor%}
+    </center>
 </body>
 </html>

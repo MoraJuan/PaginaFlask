@@ -20,8 +20,7 @@ def usuario():
 
 @app.route('/bienvenida',methods = ['GET','POST'])
 def bienvenida():
-    if request.method == 'POST':
-            print()
+    return render_template('bienvenida.html')
 
 @app.route('/incio_sesion', methods = ['GET','POST'])
 def iniciar_sesion():
@@ -83,11 +82,33 @@ def lista_ranking():
 def listar_tiempo():
     if request.method ==  'POST':
         if request.form['tiempo']:
+            
             return render_template('listar_tiempo.html', tiempo= request.form['tiempo'], receta = Receta.query.filter(Receta.tiempo < int(request.form['tiempo'] )).all())
     else:
         return render_template('listar_tiempo.html')
-@app
 
+
+@app.route('/incrementarMeGusta', methods = ['POST', 'GET'])
+def incrementar():
+    if request.method == 'POST':
+        if request.form['recetaid']:
+                receta_actual = Receta.query.get(request.form['recetaid'])
+                nueva_receta = Receta(id = receta_actual.id,nombre = receta_actual.nombre, tiempo = receta_actual.tiempo, fecha = receta_actual.fecha, elaboracion = receta_actual.elaboracion, cantidadmegusta = int(receta_actual.cantidadmegusta)+1,  usuarioid = receta_actual.usuarioid, ingrediente = receta_actual.ingrediente)
+                db.session.delete(receta_actual)
+                db.session.add(nueva_receta)
+                db.session.commit()
+                user_actual = __sesionactual.getUsuario().id
+                nombre_usuario = user_actual.nombre
+                return render_template('aviso.html')
+    return render_template('listar_tiempo.html')
+
+@app.route('/listar_ingrediente', methods = ['GET', 'POST'])
+def listar_ingredientes():
+    if request.method == 'POST':
+        if request.form['ingrediente']:
+            return render_template('listar_ingrediente.html', ingrediente = request.form['ingrediente'], receta = Receta.query.filter(Receta.ingrediente.any(request.form['ingrediente'])).all())
+    else:
+        return render_template('listar_ingrediente.html', ingrediente = None)
 
 @app.route('/nuevo_usuario', methods = ['GET','POST'])
 def nuevo_usuario():
